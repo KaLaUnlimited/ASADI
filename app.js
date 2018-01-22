@@ -138,14 +138,14 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().loggedBy
 
 
 
-movie_ref
-  .orderByChild('timeLogged')
-  .equalTo('2000')
-  .startAt('2000')
-  .endAt('2018')
-  .once('value')
-  .then(function(movie) {
-  console.log(movie.val());
-});
+// movie_ref
+//   .orderByChild('timeLogged')
+//   .equalTo('2000')
+//   .startAt('2000')
+//   .endAt('2018')
+//   .once('value')
+//   .then(function(movie) {
+//   console.log(movie.val());
+// });
 
 
