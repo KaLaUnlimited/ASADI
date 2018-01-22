@@ -13,6 +13,7 @@
   firebase.initializeApp(config);
 
 
+var flightData_ref= firebase.database().ref('Site/FlightData/')
   var timeLogged ;
   var loggedBy;
   var systemStatus;
@@ -80,8 +81,8 @@ $("#log").on("click", function(event){
 
     firebase.database().ref('Site/FlightData/').push(FlightData);
    // firebase.database().ref('Site/HeliumData/').push(FlightData);
-    timeLogged =$("#Time-Logged-Input").val("");
     loggedBy=$("#Logged-By-Input").val("");
+    timeLogged =$("#Time-Logged-Input").val("");
     systemStatus=$("#System-Status-Input").val("");
     flightAltitude=$("#Flight-Altitude-Input").val("");
     reasonMoored=$("#Reason-Moored-Input").val("");
@@ -102,49 +103,49 @@ $("#log").on("click", function(event){
 });
 
 
-firebase.database().ref('Site/FlightData/').on("child_added", function(snap){
+flightData_ref.on("child_added", function(snap){
 
-console.log(timeLogged);
+console.log(loggedBy);
+
 //$(".display").append(snap.val().Kavodel);
-$("#report-table> tbody").append("<tr><td" +snap.val().timeLogged + "</td><td>" + snap.val().loggedBy + "</td><td>" + snap.val().systemStatus + "</td><td>" + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" + snap.val().Launches + "</td><td>"+ snap.val().recoveries
- + "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds + "</td><td>"+windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
+//console.log("value of timelogged:" + snap.val().timeLogged);
+$("#report-table> tbody").html("<tr><td>" + snap.val().loggedBy
+  + "</td><td>" +snap.val().timeLogged+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
+  + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
+  + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
+  + "</td><td>"+windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
+  + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
+
+
+$("#full-report-table > tbody").append("<tr><td>" + snap.val().loggedBy
+  + "</td><td>" +snap.val().timeLogged+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
+  + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
+  + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
+  + "</td><td>"+windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
+  + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
 
 })
 
 
 
-//display();
+////////////search record///////////
+
+//input timed Logged
+//pull all items with that time logged
+//separate by time logg
 
 
-  //database.ref().push(newRecord);
- // alert();
 
+movie_ref
+  .orderByChild('timeLogged')
+  .equalTo('2000')
+  .startAt('2000')
+  .endAt('2018')
+  .once('value')
+  .then(function(movie) {
+  console.log(movie.val());
+});
 
-  // $("#System-status-input").val("");
-  // $("#groundTemp").val("");
-  // $("#flightAltitude").val("");
-  // $("#reasonMoored").val("");
-
-// });
-
-
-//database.ref().on("value", function(childSnapshot){
- // console.log(childSnapshot);
-
-
-// var System-status-input= childSnapshot.val().name;
-// var flightAltitude = childSnapshot.val().role;
-// var reasonMoored = childSnapshot.val().start;
-// var Launches = childSnapshot.val().rate;
-
-
-// var System-status-input = moment.unix(empStart).format("MM/DD/YY");
-
-// var flightAltitude = moment().diff(moment.unix(empStart, "X"), "months");
-
-// var reasonMoored = empMonths * empRate;
-
-//$("#employee-table> tbody").append("<tr><td" + System-status-input + "</td><td>" + empRole + "</td><td>" + empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>");
 
