@@ -14,6 +14,7 @@
 
 
 var flightData_ref= firebase.database().ref('Site/FlightData/')
+  var dateLogged;
   var timeLogged ;
   var loggedBy;
   var systemStatus;
@@ -63,6 +64,7 @@ $("#log").on("click", function(event){
 dataGenerator();
 
   var FlightData={
+   dateLogged: dateLogged,
    timeLogged: timeLogged,
    loggedBy:loggedBy,
    systemStatus:systemStatus,
@@ -116,7 +118,7 @@ console.log(loggedBy);
 
 //$(".display").append(snap.val().Kavodel);
 //console.log("value of timelogged:" + snap.val().timeLogged);
-$("#report-table> tbody").html("<tr><td>" + snap.val().loggedBy
+$("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
   + "</td><td>" +snap.val().timeLogged+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
   + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
   + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
@@ -125,7 +127,7 @@ $("#report-table> tbody").html("<tr><td>" + snap.val().loggedBy
 
 
 
-$("#full-report-table > tbody").append("<tr><td>" + snap.val().loggedBy
+$("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
   + "</td><td>" +snap.val().timeLogged+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
   + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
   + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
@@ -136,29 +138,31 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().loggedBy
 })
 
 
-////////////search record///////////
-var startDate=$("#Start-Date").val().trim();
-var endDate=$("#End-Date").val().trim();
+///////////////////////////////////////////////////////search record///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// var startDate=$("#Start-Date").val().trim();
+// var endDate=$("#End-Date").val().trim();
 
 //input timed Logged
 //pull all items with that time logged
 //separate by time logg
-$("#submit").on("click", function(event){
+// $("#search").on("click", function(event){
+//   event.preventDefault();
+// str.search("blue");
+// //search();
+// });
 
+// function search(start, end){
 
-}
-function search(){
-
-flightData_ref
-  .orderByChild('timeLogged')
-  .equalTo('2000')
-  .startAt('2000')
-  .endAt('2018')
-  .once('value')
-  .then(function(movie) {
-  console.log(movie.val());
-});
-}
+// flightData_ref
+//   .orderByChild(dateLogged)
+//   .equalTo(startDate)
+//   .startAt(startDate)
+//   .endAt(endDate)
+//   .once('value')
+//   .then(function(movie) {
+//   console.log(movie.val());
+// });
+// }
 
 
 
@@ -169,7 +173,7 @@ flightData_ref
 
 ///////////////testing zone ////////////////////////////////////////////////////////////////////////////////////
 function dataGenerator(){
-  
+     dateLogged=dateGen();
      loggedBy=nameGen();
     timeLogged =timeGen();
     systemStatus=Math.floor(Math.random() *85) ;
@@ -222,6 +226,14 @@ function timeGen(){
 }
 }
 
+ function dateGen(){
+      var month=Math.floor(Math.random() *11)+1;
+      var day=Math.floor(Math.random() *31);
+      var year=Math.floor(Math.random() *10)+8;
+      var date= month+'/'+day+'/'+year;
+      var strDate=String(date);
+      return strDate;
+ }
 
 
 console.log("Data gen working : name: " + loggedBy + systemStatus);
