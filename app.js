@@ -17,6 +17,7 @@ var flightData_ref= firebase.database().ref('Site/FlightData/')
   var dateLogged;
   var timeLogged ;
   var loggedBy;
+  var system;
   var systemStatus;
   var flightAltitude;
   var reasonMoored;
@@ -67,6 +68,7 @@ dataGenerator();
    dateLogged: dateLogged,
    timeLogged: timeLogged,
    loggedBy:loggedBy,
+   system:system,
    systemStatus:systemStatus,
    flightAltitude:flightAltitude,
    reasonMoored:reasonMoored,
@@ -90,6 +92,7 @@ dataGenerator();
     //working forvariables for html
     loggedBy=$("#Logged-By-Input").val("");
     timeLogged =$("#Time-Logged-Input").val("");
+    system=$("#System-Input").val("");
     systemStatus=$("#System-Status-Input").val("");
     flightAltitude=$("#Flight-Altitude-Input").val("");
     reasonMoored=$("#Reason-Moored-Input").val("");
@@ -119,16 +122,16 @@ console.log(loggedBy);
 //$(".display").append(snap.val().Kavodel);
 //console.log("value of timelogged:" + snap.val().timeLogged);
 $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
-  + "</td><td>" +snap.val().timeLogged+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
+  + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>" 
   + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
   + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
   + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
-
+var update=$("<button>").attr("class","update");
 
 $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
-  + "</td><td>" +snap.val().timeLogged+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
+  + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
   + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
   + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
   + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
@@ -139,25 +142,25 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
 
 
 ///////////////////////////////////////////////////////search record///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// var startDate=$("#Start-Date").val().trim();
-// var endDate=$("#End-Date").val().trim();
+//  var startDate=$("#Start-Date").val().trim();
+// // var endDate=$("#End-Date").val().trim();
 
-//input timed Logged
-//pull all items with that time logged
-//separate by time logg
+// //input timed Logged
+// //pull all items with that time logged
+// //separate by time logg
 // $("#search").on("click", function(event){
 //   event.preventDefault();
-// str.search("blue");
-// //search();
+
+// search(startDate/*,endDate*/);
 // });
 
-// function search(start, end){
+// function search(start){
 
 // flightData_ref
-//   .orderByChild(dateLogged)
+//   .orderByChild()//dateLogged)
 //   .equalTo(startDate)
-//   .startAt(startDate)
-//   .endAt(endDate)
+//  // .startAt(startDate)
+//  // .endAt(endDate)
 //   .once('value')
 //   .then(function(movie) {
 //   console.log(movie.val());
@@ -171,14 +174,15 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
 
 
 
-///////////////testing zone ////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////testing zone ////////////////////////////////////////////////////////////////////////////////////
 function dataGenerator(){
      dateLogged=dateGen();
      loggedBy=nameGen();
     timeLogged =timeGen();
-    systemStatus=Math.floor(Math.random() *85) ;
-    flightAltitude=Math.floor(Math.random() *85) ;
-    reasonMoored=Math.floor(Math.random() *85) ;
+   // systemStatus=sysStat(); //Math.floor(Math.random() *85) ;
+   // flightAltitude=Math.floor(Math.random() *85) ;
+        sysStat();
+   // reasonMoored=Math.floor(Math.random() *85) ;
     Launches =Math.floor(Math.random() *85) ;
     recoveries=Math.floor(Math.random() *85) ;
     tetherTension=Math.floor(Math.random() *85) ;
@@ -236,11 +240,45 @@ function timeGen(){
  }
 
 
+ function sysStat(){
+   var day=0;//Math.floor(Math.random() *2);
+   var alt=Math.floor(Math.random() *13000)+19000;
+   //var stat=
+    if(day==0){
+      flightAltitude=0;
+      system ="Moored";
+      systemStatus=sysStatGen(systemStatusArr);
+      reasonMoored=reasonGen(reason);
+    //  return systemStatus;
+      } else{
+        system="Aloft";
+        systemStatus=sysStatGen(systemStatusArr);
+        flightAltitude= alt;
+        reasonMoored="N/A";
+      //  return  flightAltitude;
+      }
+
+   
+
+ }
+ function sysStatGen(list){
+    var s=Math.floor(Math.random() *3);
+        systemStatus=list[s];
+        return systemStatus
+ }
+ function reasonGen(list){
+    var r =Math.floor(Math.random() *4);
+    reasonMoored=list[r];
+    return reasonMoored
+ }
+
+
 console.log("Data gen working : name: " + loggedBy + systemStatus);
 }
 /////////////
 var adjectives = ["adamant", "adroit", "amatory", "animistic", "antic", "arcadian", "baleful", "bellicose", "bilious", "boorish", "calamitous", "caustic", "cerulean", "comely", "concomitant", "contumacious", "corpulent", "crapulous", "defamatory", "didactic", "dilatory", "dowdy", "efficacious", "effulgent", "egregious", "endemic", "equanimous", "execrable", "fastidious", "feckless", "fecund", "friable", "fulsome", "garrulous", "guileless", "gustatory", "heuristic", "histrionic", "hubristic", "incendiary", "insidious", "insolent", "intransigent", "inveterate", "invidious", "irksome", "jejune", "jocular", "judicious", "lachrymose", "limpid", "loquacious", "luminous", "mannered", "mendacious", "meretricious", "minatory", "mordant", "munificent", "nefarious", "noxious", "obtuse", "parsimonious", "pendulous", "pernicious", "pervasive", "petulant", "platitudinous", "precipitate", "propitious", "puckish", "querulous", "quiescent", "rebarbative", "recalcitant", "redolent", "rhadamanthine", "risible", "ruminative", "sagacious", "salubrious", "sartorial", "sclerotic", "serpentine", "spasmodic", "strident", "taciturn", "tenacious", "tremulous", "trenchant", "turbulent", "turgid", "ubiquitous", "uxorious", "verdant", "voluble", "voracious", "wheedling", "withering", "zealous"];
 var nouns = ["ninja", "chair", "pancake", "statue", "unicorn", "rainbows", "laser", "senor", "bunny", "captain", "nibblets", "cupcake", "carrot", "gnomes", "glitter", "potato", "salad", "toejam", "curtains", "beets", "toilet", "exorcism", "stick figures", "mermaid eggs", "sea barnacles", "dragons", "jellybeans", "snakes", "dolls", "bushes", "cookies", "apples", "ice cream", "ukulele", "kazoo", "banjo", "opera singer", "circus", "trampoline", "carousel", "carnival", "locomotive", "hot air balloon", "praying mantis", "animator", "artisan", "artist", "colorist", "inker", "coppersmith", "director", "designer", "flatter", "stylist", "leadman", "limner", "make-up artist", "model", "musician", "penciller", "producer", "scenographer", "set decorator", "silversmith", "teacher", "auto mechanic", "beader", "bobbin boy", "clerk of the chapel", "filling station attendant", "foreman", "maintenance engineering", "mechanic", "miller", "moldmaker", "panel beater", "patternmaker", "plant operator", "plumber", "sawfiler", "shop foreman", "soaper", "stationary engineer", "wheelwright", "woodworkers"];
-var militaryTime=["000",'100','200','300','400', '500', '600', '700', '800', '900',"1000","1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100","2200", "2300"];
- 
+var militaryTime=["0000",'0100','0200','0300','0400', '0500', '0600', '0700', '0800', '0900',"1000","1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100","2200", "2300"];
+var systemStatusArr=["FMC", "NMC", "PMC"];
+var reason=["WX","SM","UM","BD"] ;
 
