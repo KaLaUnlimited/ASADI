@@ -35,6 +35,8 @@ var flightData_ref= firebase.database().ref('Site/FlightData/')
   var reasonMoored;
   var Launches;
   var notes;
+  $(".mooredButton").hide();
+  $(".aloftButton").hide();
 
 var y =0;
  if(y===23){
@@ -121,6 +123,8 @@ console.log(loggedBy);
 
 //$(".display").append(snap.val().Kavodel);
 //console.log("value of timelogged:" + snap.val().timeLogged);
+
+////////////////Current Status Table
 $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
   + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>" 
   + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
@@ -129,6 +133,8 @@ $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
 var update=$("<button>").attr("class","update");
+//////////////////Full Day Table
+
 
 $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
   + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
@@ -137,7 +143,24 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
   + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
+      if(snap.val().system==="Moored"){
+      //  $( "div.second" ).replaceWith( "<h2>New heading</h2>" );
+      console.log("if/else :moored")
+        $("#atlanta-Site").empty();
+          $(".aloftButton").hide();
+          $(".mooredButton").show();
+          $("#displayStatus").text(snap.val().systemStatus);
+          $("#displayReason").text(snap.val().reasonMoored);
+ 
 
+      }
+      else{
+          $("#atlanta-Site").empty();
+          $(".mooredButton").hide();
+           $(".aloftButton").show();
+            $("#displayStatus").text(snap.val().systemStatus);
+            $("#displayReason").text(snap.val().reasonMoored);
+      }
 })
 
 
@@ -241,7 +264,7 @@ function timeGen(){
 
 
  function sysStat(){
-   var day=0;//Math.floor(Math.random() *2);
+   var day=Math.floor(Math.random() *2);
    var alt=Math.floor(Math.random() *13000)+19000;
    //var stat=
     if(day==0){

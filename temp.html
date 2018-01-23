@@ -14,6 +14,7 @@
     </style>
 
     <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Project 1</title>
@@ -104,8 +105,26 @@
       <input type="text" class="form-control" placeholder="Notes" id="Notes">
     </div>
   </div>
-
+<div class="row">
+  <div class="col-md-6">
   <button type="submit" class="btn btn-primary mb-2" id="log">Submit</button>
+  
+<!--  Site's Toggle Status -->
+  <div class="alertToggle col-md-4" id="#atlanta-Site">
+    <ul class="list-group">
+  <li class="list-group-item active" style="padding-left: 30px"> Site: Atlanta
+  <button type="button" class="btn btn-success aloftButton" style="margin-left: 9px" >Aloft</button>
+  <button type="button" class="btn btn-danger mooredButton" style="margin-left: 5px"> Moored</button></li>
+  <li class="list-group-item" >Status: <span id="displayStatus"> Display</span></li> 
+  <li class="list-group-item" >Reason: <span id="displayReason"> Display</span></li>
+ 
+</ul>
+  
+
+
+</div>
+</div>
+</div>
 </form>
 <div class="display"></div>
 
