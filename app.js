@@ -2,15 +2,7 @@
 //alert("testing!");
 
 //   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCzntWHt0eQrf8_T7sNXd7HDcmHmJQK-xM",
-    authDomain: "realtime-d6489.firebaseapp.com",
-    databaseURL: "https://realtime-d6489.firebaseio.com",
-    projectId: "realtime-d6489",
-    storageBucket: "realtime-d6489.appspot.com",
-    messagingSenderId: "540451789449"
-  };
-  firebase.initializeApp(config);
+ 
 
 
 var flightData_ref= firebase.database().ref('Site/FlightData/')
@@ -64,6 +56,8 @@ $("#log").on("click", function(event){
    // ballonetPressure=$("#Ballonet-Pressure-Input").val().trim();
    // notes= $("#Notes").val().trim();
 
+
+////////////////////////////////////////////////////////////////////////////this is testing data//////////////////////////////////////////////////////////////////////
 dataGenerator();
 
   var FlightData={
@@ -110,7 +104,7 @@ dataGenerator();
     ballonetPressure=$("#Ballonet-Pressure-Input").val("");
     notes= $("#Notes").val("");
 
-    //testing function**********************
+    
 
 
 
@@ -121,10 +115,8 @@ flightData_ref.on("child_added", function(snap){
 
 console.log(loggedBy);
 
-//$(".display").append(snap.val().Kavodel);
-//console.log("value of timelogged:" + snap.val().timeLogged);
-
-////////////////Current Status Table
+/
+////////////////////////////////////////////////////////////Current Status Table////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
   + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>" 
   + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
@@ -133,7 +125,7 @@ $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
 var update=$("<button>").attr("class","update");
-//////////////////Full Day Table
+//////////////////////////////////////////////////////////////////Full Day Table//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
@@ -144,7 +136,7 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
       if(snap.val().system==="Moored"){
-      //  $( "div.second" ).replaceWith( "<h2>New heading</h2>" );
+     
       console.log("if/else :moored")
         $("#atlanta-Site").empty();
           $(".aloftButton").hide();
@@ -162,33 +154,6 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
             $("#displayReason").text(snap.val().reasonMoored);
       }
 })
-
-
-///////////////////////////////////////////////////////search record///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  var startDate=$("#Start-Date").val().trim();
-// // var endDate=$("#End-Date").val().trim();
-
-// //input timed Logged
-// //pull all items with that time logged
-// //separate by time logg
-// $("#search").on("click", function(event){
-//   event.preventDefault();
-
-// search(startDate/*,endDate*/);
-// });
-
-// function search(start){
-
-// flightData_ref
-//   .orderByChild()//dateLogged)
-//   .equalTo(startDate)
-//  // .startAt(startDate)
-//  // .endAt(endDate)
-//   .once('value')
-//   .then(function(movie) {
-//   console.log(movie.val());
-// });
-// }
 
 
 
@@ -302,4 +267,4 @@ var nouns = ["ninja", "chair", "pancake", "statue", "unicorn", "rainbows", "lase
 var militaryTime=["0000",'0100','0200','0300','0400', '0500', '0600', '0700', '0800', '0900',"1000","1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100","2200", "2300"];
 var systemStatusArr=["FMC", "NMC", "PMC"];
 var reason=["WX","SM","UM","BD"] ;
-//////////////////////////end of testing zone//////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////end of testing zone//////////////////////////////////////////////////////////////////////////////////////////////
