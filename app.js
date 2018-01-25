@@ -39,6 +39,7 @@ var database =firebase.database();
 
 $("#log").on("click", function(event){
   event.preventDefault();
+   // dateLogged =$("#Date-Input").val().trim();
    // timeLogged =$("#Time-Logged-Input").val().trim();
    // loggedBy=$("#Logged-By-Input").val().trim();
    // systemStatus=$("#System-Status-Input").val().trim();

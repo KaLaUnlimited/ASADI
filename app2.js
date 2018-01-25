@@ -1,5 +1,5 @@
 //   // Initialize Firebase
-
+alert();
 
 
 var flightData_ref= firebase.database().ref('Site/FlightData/')
@@ -15,43 +15,41 @@ $("#search").on("click", function(event){
   event.preventDefault();
 
  var startDate=$("#Start-Date").val().trim();
- var endDate=$("#End-Date").val().trim();
-console.log(startDate);
-search(startDate,endDate);
+
+search(startDate);
 
 
 
 });
 
-function search(start,end){
+function search(start){
 
 flightData_ref
-  .orderByChild("dateLogged")//dateLogged)
- //.equalTo(start)
-  .startAt(start)
-  .endAt(end)
+  .orderByChild("dateLogged")
+ .equalTo(start)
+  
   .once('value')
   .then(function(records) {
   var recObj = records.val();
-  console.log(recObj);
+  console.log("Objects: " +recObj);
   $("#search-report-table > tbody").empty();
 
 for(var child in recObj){
- // flightData_ref.on("child_added", function(records){
-  $("#search-report-table > tbody").append("<tr><td>" + recObj[child].dateLogged + "</td><td>"+ recObj[child].loggedBy
+ //flightData_ref.on("child_added", function(records){
+ 	console.log("this is the key: " +recObj[child])
+  $("#search-report-table > tbody").append("<tr data-key="+"><td>" + recObj[child].dateLogged + "</td><td>"+ recObj[child].loggedBy
   + "</td><td>" +recObj[child].timeLogged+ "</td><td>" +recObj[child].system+ "</td><td>"  + recObj[child].systemStatus + "</td><td>" 
   + recObj[child].flightAltitude + "</td><td>" + recObj[child].reasonMoored + "</td><td>" 
   + recObj[child].Launches + "</td><td>"+ recObj[child].recoveries+ "</td><td>" +recObj[child].tetherTension + "</td><td>" +recObj[child].groundWinds 
   + "</td><td>"+recObj[child].windsAloft + "</td><td>"+recObj[child].groundTemp + "</td><td>"+ recObj[child].barometricPressure + "</td><td>"+recObj[child].pitch 
   + "</td><td>"+recObj[child].heliumPressure + "</td><td>"+recObj[child].ballonetPressure + "</td><td>"+recObj[child].notes + "</td><td><button data-key="
-  + recObj[child].key + ">Delete Record</button></td></tr>" );
+  + recObj[child].key + ">Update Record</button></td></tr>" );
 
 
 }
-});
 //});
-}
-
+})
+};
 
 
 
@@ -64,14 +62,14 @@ for(var child in recObj){
 
 
 
-$(document).on('click', '#search-report-table > tbody tr button', deleteRec);
+// $(document).on('click', '#search-report-table > tbody tr button', deleteRec);
 
-function deleteRec() {
-  var key = $(this).data('key');
+// function deleteRec() {
+//   var key = $(this).data('key');
   
-  flightData_ref.child(key).remove();
-  $(this).parents('tr').remove();
-}
+//   flightData_ref.child(key).remove();
+//   $(this).parents('tr').remove();
+// }
 
 
 
@@ -81,53 +79,67 @@ function deleteRec() {
 /////////////////////////////////////////////////////////////////////////update/////////////////////////////////////////
 
 
-function updateItem(key) {
-	var title = $('#title').val().trim();
-	var date = $('#date').val().trim();
+// function updateItem(key) {
+//    dateLogged =$("#Date-Input").val().trim();
+//    timeLogged =$("#Time-Logged-Input").val().trim();
+//    loggedBy=$("#Logged-By-Input").val().trim();
+//    systemStatus=$("#System-Status-Input").val().trim();
+//    flightAltitude=$("#Flight-Altitude-Input").val().trim();
+//    reasonMoored=$("#Reason-Moored-Input").val().trim();
+//    Launches =$("#Launches-Input").val().trim();
+//    recoveries=$("#Recoveries-Input").val().trim();
+//    tetherTension=$("#Tether-Tension-Input").val().trim();
+//    groundWinds=$("#Ground-Winds-Input").val().trim();
+//    windsAloft =$("#Winds-Aloft-Input").val().trim();
+//    groundTemp=$("#Ground-Temp-Input").val().trim();
+//    barometricPressure=$("#Barometric-Pressure-Input").val().trim();
+//    pitch =$("#Pitch-Input").val().trim();
+//    heliumPressure=$("#Helium-Pressure-Input").val().trim();
+//    ballonetPressure=$("#Ballonet-Pressure-Input").val().trim();
+//    notes= $("#Notes").val().trim();
+// 	flightData_ref.child(key).set({
+// 		title: title,
+// 		date: date
+// 	});
 
-	movie_ref.child(key).set({
-		title: title,
-		date: date
-	});
+// 	$(`tr[data-key="${key}"]`).after(`
+// 		<tr data-key="${key}">
+// 			<td>${title}</td>
+// 			<td>${date}</td>
+// 			<td>
+// 				<button class="update">Update</button>
+// 			</td>
+// 		</tr>
+// 	`).remove();
 
-	$(`tr[data-key="${key}"]`).after(`
-		<tr data-key="${key}">
-			<td>${title}</td>
-			<td>${date}</td>
-			<td>
-				<button class="update">Update</button>
-			</td>
-		</tr>
-	`).remove();
+// 	$('form input').val('');
+// 	$('#cancel').hide();
+// 	$('#save').unbind().on('click', addMovie);
+// }
 
-	$('form input').val('');
-	$('#cancel').hide();
-	$('#save').unbind().on('click', addMovie);
-}
+// function getItemData(event) {
+// 	event.preventDefault();
+// 	var key = $(this).parents('tr').data('key');
 
-function getItemData(event) {
-	event.preventDefault();
-	var key = $(this).parents('tr').data('key');
-
-	movie_ref.child(key).once('value').then(function(movie) {
-		$('#title').val(movie.val().title);
-		$('#date').val(movie.val().date);
-	});
+// 	flightData_ref.child(key).once('value').then(function(flightRec) {
+// 		$('#title').val(flightRec.val().title);
+// 		$('#date').val(flightRec.val().date);
+// 	});
 	
-	$('#save').unbind().on('click', function(event) {
-		event.preventDefault();
-		updateItem(key);
-	});
-	$('#cancel').show();
-}
+// 	$('#save').unbind().on('click', function(event) {
+// 		event.preventDefault();
+// 		updateItem(key);
+// 	});
+// 	$('#cancel').show();
+// }
 
-function init() {
-	movie_ref.on('child_added', addMovieToDOM);
-	$(document).on('click', '.update', getItemData);
-	$('#save').on('click', addMovie);
-}
+// function init() {
+// 	movie_ref.on('child_added', addMovieToDOM);
+// 	$(document).on('click', '.update', getItemData);
+// 	$('#save').on('click', addMovie);
+// }
 
-init(); // Starting the App
+// init(); // Starting the App
 
 
 
