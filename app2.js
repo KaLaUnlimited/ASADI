@@ -8,9 +8,7 @@ var flightData_ref= firebase.database().ref('Site/FlightData/')
 // var startDate=$("#Start-Date").val().trim();
 
 
-// //input timed Logged
-// //pull all items with that time logged
-// //separate by time logg
+
 $("#search").on("click", function(event){
   event.preventDefault();
 
@@ -50,37 +48,16 @@ for(var child in recObj){
 
 
 }
-//});
+
 })
 };
 
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////update and delete record/////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-// $(document).on('click', '#search-report-table > tbody tr button', deleteRec);
-
-// function deleteRec() {
-//   var key = $(this).data('key');
-  
-//   flightData_ref.child(key).remove();
-//   $(this).parents('tr').remove();
-// }
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////////update a record///////////////////////////////////////////////////////////////////////////////////
 var key;
-/////////////////////////////////////////////////////////////////////////update/////////////////////////////////////////
-
 $(document).on('click', "#upDateRec", function(){
 	console.log("test");
 	key = $(this).parents('tr').data('key');
@@ -145,53 +122,6 @@ search(dateLogged);
 
 
 
-// 	$(`tr[data-key="${key}"]`).after(`
-// 		<tr data-key="${key}">
-// 			<td>${title}</td>
-// 			<td>${date}</td>
-// 			<td>
-// 				<button class="update">Update</button>
-// 			</td>
-// 		</tr>
-// 	`).remove();
-
-// 	$('form input').val('');
-// 	$('#cancel').hide();
-// 	$('#save').unbind().on('click', addMovie);
-// }
-
-// function getItemData(event) {
-// 	event.preventDefault();
-// 	var key = $(this).parents('tr').data('key');
-
-// 	flightData_ref.child(key).once('value').then(function(flightRec) {
-// 		$('#title').val(flightRec.val().title);
-// 		$('#date').val(flightRec.val().date);
-// 	});
-	
-// 	$('#save').unbind().on('click', function(event) {
-// 		event.preventDefault();
-// 		updateItem(key);
-// 	});
-// 	$('#cancel').show();
-// }
-
-// function init() {
-// 	movie_ref.on('child_added', addMovieToDOM);
-// 	$(document).on('click', '.update', getItemData);
-// 	$('#save').on('click', addMovie);
-// }
-
-// init(); // Starting the App
-
-
-
-
-
-function test(some_string) {
-	console.log(some_string);
-}
-test('some value')
 
 
 
@@ -211,12 +141,6 @@ test('some value')
 
 
 
-// movie_ref.push({
-// 	title: 'bob',
-// 	age: 38
-// });
 
 
-// movie_ref.child('-L3Pt7r7KCjBIOPWgsQ0').on('value', function(snapshot) {
-// 	console.log(snapshot.val());
-// })
+

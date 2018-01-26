@@ -1,5 +1,5 @@
 
-//alert("testing!");
+
 
 //   // Initialize Firebase
  
@@ -39,6 +39,8 @@ var database =firebase.database();
 
 $("#log").on("click", function(event){
   event.preventDefault();
+
+
    // dateLogged =$("#Date-Input").val().trim();
    // timeLogged =$("#Time-Logged-Input").val().trim();
    // loggedBy=$("#Logged-By-Input").val().trim();
@@ -58,7 +60,7 @@ $("#log").on("click", function(event){
    // notes= $("#Notes").val().trim();
 
 
-////////////////////////////////////////////////////////////////////////////this is testing data//////////////////////////////////////////////////////////////////////
+////datagenerator is a testing function//////////
 dataGenerator();
 
   var FlightData={
@@ -136,6 +138,8 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
   + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
+
+///////////////////////////////////////////////////////////display on dashboard aloft vs. moored//////////////////////////////////////////////////////////////////
       if(snap.val().system==="Moored"){
      
       console.log("if/else :moored")
