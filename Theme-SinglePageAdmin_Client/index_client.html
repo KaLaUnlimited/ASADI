@@ -10,15 +10,15 @@
 
     <link href="css/main.css" rel="stylesheet">
     <link href="css/font-style.css" rel="stylesheet">
-    <link href="css/flexslider.css" rel="stylesheet">
+    <!-- <link href="css/flexslider.css" rel="stylesheet"> -->
 
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
-	<script type="text/javascript" src="js/lineandbars.js"></script>
+	<!-- <script type="text/javascript" src="js/lineandbars.js"></script> -->
 
 	<script type="text/javascript" src="js/dash-charts.js"></script>
-	<script type="text/javascript" src="js/gauge.js"></script>
+	<!-- <script type="text/javascript" src="js/gauge.js"></script> -->
 
 	<!-- NOTY JAVASCRIPT -->
 	<script type="text/javascript" src="js/noty/jquery.noty.js"></script>
@@ -51,7 +51,7 @@
 	<link href="http://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
   	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function () {
 
         $("#btn-blog-next").click(function () {
@@ -81,7 +81,7 @@
         });
     });
 
-</script>
+</script> -->
   </head>
   <body>
 
@@ -187,28 +187,20 @@
 	      		<dtitle>Hub Charts</dtitle>
 	      		<hr>
 
+            <canvas id="line-chart" width="150px" height="75px"></canvas>
+
       		</div>
 
 
       	</div>
 
-      	<div class="col-sm-6 col-lg-6">
-
-	  <!-- LIVE VISITORS BLOCK -->
-      		<div class="dash-unit" style="width:540px;">
-	      		<dtitle>Site Search Data</dtitle>
-	      		<hr>
-
-      		</div>
-
-
-      		</div><!-- /row -->
+      	<!-- /row -->
       	</div><!-- /container -->
 	</div><!-- /footerwrap -->
 
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
@@ -260,7 +252,9 @@
 
 
 </script>
-
-
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/logic.js"></script>
 </body>
 </html>
