@@ -59,7 +59,7 @@ $("#log").on("click", function(event){
 
 
 ////////////////////////////////////////////////////////////////////////////this is testing data//////////////////////////////////////////////////////////////////////
-//dataGenerator();
+dataGenerator();
 
   var FlightData={
    dateLogged: dateLogged,
@@ -116,7 +116,7 @@ flightData_ref.on("child_added", function(snap){
 
 console.log(loggedBy);
 
-/
+
 ////////////////////////////////////////////////////////////Current Status Table////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
   + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>" 
@@ -164,108 +164,108 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
 
 
 ///////////////////////////////////////////////////////////////////////testing zone ////////////////////////////////////////////////////////////////////////////////////
-// function dataGenerator(){
-//      dateLogged=dateGen();
-//      loggedBy=nameGen();
-//     timeLogged =timeGen();
+function dataGenerator(){
+     dateLogged=dateGen();
+     loggedBy=nameGen();
+    timeLogged =timeGen();
  
-//     sysStat();
-//     Launches =Math.floor(Math.random() *85) ;
-//     recoveries=Math.floor(Math.random() *85) ;
-//     tetherTension=Math.floor(Math.random() *85) ;
-//     groundWinds=Math.floor(Math.random() *85) ;
-//     windsAloft =Math.floor(Math.random() *85) ;
-//     groundTemp=Math.floor(Math.random() *85) ;
-//     barometricPressure=Math.floor(Math.random() *85) ;
-//     pitch =Math.floor(Math.random() *85) ;
-//     heliumPressure=Math.floor(Math.random() *85) ;
-//     ballonetPressure=Math.floor(Math.random() *85) ;
-//     notes= Math.floor(Math.random() *85) ;
+    sysStat();
+    Launches =Math.floor(Math.random() *85) ;
+    recoveries=Math.floor(Math.random() *85) ;
+    tetherTension=Math.floor(Math.random() *85) ;
+    groundWinds=Math.floor(Math.random() *85) ;
+    windsAloft =Math.floor(Math.random() *85) ;
+    groundTemp=Math.floor(Math.random() *85) ;
+    barometricPressure=Math.floor(Math.random() *85) ;
+    pitch =Math.floor(Math.random() *85) ;
+    heliumPressure=Math.floor(Math.random() *85) ;
+    ballonetPressure=Math.floor(Math.random() *85) ;
+    notes= Math.floor(Math.random() *85) ;
 
 
     
-// //random name generator
+//random name generator
 
-// function nameGen(){
-//     loggedBy=randomEl(adjectives)+' '+randomEl(nouns);
+function nameGen(){
+    loggedBy=randomEl(adjectives)+' '+randomEl(nouns);
   
-// function randomEl(list) {
-//     var i = Math.floor(Math.random() *85) ;//list.length);
-//     console.log(list[i])
+function randomEl(list) {
+    var i = Math.floor(Math.random() *85) ;//list.length);
+    console.log(list[i])
 
-//     return list[i];
-// }
+    return list[i];
+}
 
 
-// return loggedBy;
-// }
+return loggedBy;
+}
 
-// function timeGen(){
+function timeGen(){
 
  
-//   timeLogged=randomMilitaryTime(militaryTime);
+  timeLogged=randomMilitaryTime(militaryTime);
   
-//   console.log("y= " + y)
-//  y++;
-//   return timeLogged;
+  console.log("y= " + y)
+ y++;
+  return timeLogged;
 
 
-//  function randomMilitaryTime(list){
-//     //Math.floor(Math.random() *24) ;
-//     console.log(list[y]);
-//       return list[y];
-// }
-// }
+ function randomMilitaryTime(list){
+    //Math.floor(Math.random() *24) ;
+    console.log(list[y]);
+      return list[y];
+}
+}
 
-//  function dateGen(){
-//       var month=Math.floor(Math.random() *11)+1;
-//       var day=Math.floor(Math.random() *31);
-//       var year=Math.floor(Math.random() *10)+8;
-//       var date= month+'/'+day+'/'+year;
-//       var strDate=String(date);
-//       return strDate;
-//  }
+ function dateGen(){
+      var month=Math.floor(Math.random() *11)+1;
+      var day=Math.floor(Math.random() *31);
+      var year=Math.floor(Math.random() *10)+8;
+      var date= month+'/'+day+'/'+year;
+      var strDate=String(date);
+      return strDate;
+ }
 
 
-//  function sysStat(){
-//    var day=Math.floor(Math.random() *2);
-//    var alt=Math.floor(Math.random() *13000)+19000;
-//    //var stat=
-//     if(day==0){
-//       flightAltitude=0;
-//       system ="Moored";
-//       systemStatus=sysStatGen(systemStatusArr);
-//       reasonMoored=reasonGen(reason);
-//     //  return systemStatus;
-//       } else{
-//         system="Aloft";
-//         systemStatus=sysStatGen(systemStatusArr);
-//         flightAltitude= alt;
-//         reasonMoored="N/A";
-//       //  return  flightAltitude;
-//       }
+ function sysStat(){
+   var day=Math.floor(Math.random() *2);
+   var alt=Math.floor(Math.random() *13000)+19000;
+   //var stat=
+    if(day==0){
+      flightAltitude=0;
+      system ="Moored";
+      systemStatus=sysStatGen(systemStatusArr);
+      reasonMoored=reasonGen(reason);
+    //  return systemStatus;
+      } else{
+        system="Aloft";
+        systemStatus=sysStatGen(systemStatusArr);
+        flightAltitude= alt;
+        reasonMoored="N/A";
+      //  return  flightAltitude;
+      }
 
    
 
-//  }
-//  function sysStatGen(list){
-//     var s=Math.floor(Math.random() *3);
-//         systemStatus=list[s];
-//         return systemStatus
-//  }
-//  function reasonGen(list){
-//     var r =Math.floor(Math.random() *4);
-//     reasonMoored=list[r];
-//     return reasonMoored
-//  }
+ }
+ function sysStatGen(list){
+    var s=Math.floor(Math.random() *3);
+        systemStatus=list[s];
+        return systemStatus
+ }
+ function reasonGen(list){
+    var r =Math.floor(Math.random() *4);
+    reasonMoored=list[r];
+    return reasonMoored
+ }
 
 
-// console.log("Data gen working : name: " + loggedBy + systemStatus);
-// }
+console.log("Data gen working : name: " + loggedBy + systemStatus);
+}
 
-// var adjectives = ["adamant", "adroit", "amatory", "animistic", "antic", "arcadian", "baleful", "bellicose", "bilious", "boorish", "calamitous", "caustic", "cerulean", "comely", "concomitant", "contumacious", "corpulent", "crapulous", "defamatory", "didactic", "dilatory", "dowdy", "efficacious", "effulgent", "egregious", "endemic", "equanimous", "execrable", "fastidious", "feckless", "fecund", "friable", "fulsome", "garrulous", "guileless", "gustatory", "heuristic", "histrionic", "hubristic", "incendiary", "insidious", "insolent", "intransigent", "inveterate", "invidious", "irksome", "jejune", "jocular", "judicious", "lachrymose", "limpid", "loquacious", "luminous", "mannered", "mendacious", "meretricious", "minatory", "mordant", "munificent", "nefarious", "noxious", "obtuse", "parsimonious", "pendulous", "pernicious", "pervasive", "petulant", "platitudinous", "precipitate", "propitious", "puckish", "querulous", "quiescent", "rebarbative", "recalcitant", "redolent", "rhadamanthine", "risible", "ruminative", "sagacious", "salubrious", "sartorial", "sclerotic", "serpentine", "spasmodic", "strident", "taciturn", "tenacious", "tremulous", "trenchant", "turbulent", "turgid", "ubiquitous", "uxorious", "verdant", "voluble", "voracious", "wheedling", "withering", "zealous"];
-// var nouns = ["ninja", "chair", "pancake", "statue", "unicorn", "rainbows", "laser", "senor", "bunny", "captain", "nibblets", "cupcake", "carrot", "gnomes", "glitter", "potato", "salad", "toejam", "curtains", "beets", "toilet", "exorcism", "stick figures", "mermaid eggs", "sea barnacles", "dragons", "jellybeans", "snakes", "dolls", "bushes", "cookies", "apples", "ice cream", "ukulele", "kazoo", "banjo", "opera singer", "circus", "trampoline", "carousel", "carnival", "locomotive", "hot air balloon", "praying mantis", "animator", "artisan", "artist", "colorist", "inker", "coppersmith", "director", "designer", "flatter", "stylist", "leadman", "limner", "make-up artist", "model", "musician", "penciller", "producer", "scenographer", "set decorator", "silversmith", "teacher", "auto mechanic", "beader", "bobbin boy", "clerk of the chapel", "filling station attendant", "foreman", "maintenance engineering", "mechanic", "miller", "moldmaker", "panel beater", "patternmaker", "plant operator", "plumber", "sawfiler", "shop foreman", "soaper", "stationary engineer", "wheelwright", "woodworkers"];
-// var militaryTime=["0000",'0100','0200','0300','0400', '0500', '0600', '0700', '0800', '0900',"1000","1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100","2200", "2300"];
-// var systemStatusArr=["FMC", "NMC", "PMC"];
-// var reason=["WX","SM","UM","BD"] ;
+var adjectives = ["adamant", "adroit", "amatory", "animistic", "antic", "arcadian", "baleful", "bellicose", "bilious", "boorish", "calamitous", "caustic", "cerulean", "comely", "concomitant", "contumacious", "corpulent", "crapulous", "defamatory", "didactic", "dilatory", "dowdy", "efficacious", "effulgent", "egregious", "endemic", "equanimous", "execrable", "fastidious", "feckless", "fecund", "friable", "fulsome", "garrulous", "guileless", "gustatory", "heuristic", "histrionic", "hubristic", "incendiary", "insidious", "insolent", "intransigent", "inveterate", "invidious", "irksome", "jejune", "jocular", "judicious", "lachrymose", "limpid", "loquacious", "luminous", "mannered", "mendacious", "meretricious", "minatory", "mordant", "munificent", "nefarious", "noxious", "obtuse", "parsimonious", "pendulous", "pernicious", "pervasive", "petulant", "platitudinous", "precipitate", "propitious", "puckish", "querulous", "quiescent", "rebarbative", "recalcitant", "redolent", "rhadamanthine", "risible", "ruminative", "sagacious", "salubrious", "sartorial", "sclerotic", "serpentine", "spasmodic", "strident", "taciturn", "tenacious", "tremulous", "trenchant", "turbulent", "turgid", "ubiquitous", "uxorious", "verdant", "voluble", "voracious", "wheedling", "withering", "zealous"];
+var nouns = ["ninja", "chair", "pancake", "statue", "unicorn", "rainbows", "laser", "senor", "bunny", "captain", "nibblets", "cupcake", "carrot", "gnomes", "glitter", "potato", "salad", "toejam", "curtains", "beets", "toilet", "exorcism", "stick figures", "mermaid eggs", "sea barnacles", "dragons", "jellybeans", "snakes", "dolls", "bushes", "cookies", "apples", "ice cream", "ukulele", "kazoo", "banjo", "opera singer", "circus", "trampoline", "carousel", "carnival", "locomotive", "hot air balloon", "praying mantis", "animator", "artisan", "artist", "colorist", "inker", "coppersmith", "director", "designer", "flatter", "stylist", "leadman", "limner", "make-up artist", "model", "musician", "penciller", "producer", "scenographer", "set decorator", "silversmith", "teacher", "auto mechanic", "beader", "bobbin boy", "clerk of the chapel", "filling station attendant", "foreman", "maintenance engineering", "mechanic", "miller", "moldmaker", "panel beater", "patternmaker", "plant operator", "plumber", "sawfiler", "shop foreman", "soaper", "stationary engineer", "wheelwright", "woodworkers"];
+var militaryTime=["0000",'0100','0200','0300','0400', '0500', '0600', '0700', '0800', '0900',"1000","1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100","2200", "2300"];
+var systemStatusArr=["FMC", "NMC", "PMC"];
+var reason=["WX","SM","UM","BD"] ;
 ///////////////////////////////////////////////end of testing zone//////////////////////////////////////////////////////////////////////////////////////////////

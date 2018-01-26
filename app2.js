@@ -22,6 +22,8 @@ search(startDate);
 
 });
 
+
+
 function search(start){
 
 flightData_ref
@@ -134,6 +136,9 @@ $("#saveModal").on("click", function(){
 	   notes:notes
 	});
 
+
+
+search(dateLogged);
 	});
 
 
