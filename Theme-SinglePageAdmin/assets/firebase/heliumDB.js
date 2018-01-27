@@ -12,6 +12,11 @@ var config = {
 firebase.initializeApp(config);
 
 // Initial Values
+var groundWinds = [];
+var windsAloft = [];
+var flightAltitude = [];
+var tetherTension = [];
+
 //Save Helium Data info
 
 function saveHeliumData() {
@@ -40,16 +45,15 @@ function saveHeliumData() {
   }
 
 firebase.database().ref('Site/HeliumData/').push(HeliumData);
-console.log("Update Success");
+console.log("HeliumData Update Success");
 }
 
-
+//Retrieve one record for Helium Data info
 firebase.database().ref('Site/HeliumData/').limitToLast(1).on('child_added', function(snapshot) {
 
   console.log(snapshot.val());
 
   // Store everything into a variable.
-
   var cont1 = snapshot.val().HeliumContainer1;
   var cont2 = snapshot.val().HeliumContainer2;
   var cont3 = snapshot.val().HeliumContainer3;
@@ -59,45 +63,136 @@ firebase.database().ref('Site/HeliumData/').limitToLast(1).on('child_added', fun
   var note = snapshot.val().Notes;
   var inTLog = snapshot.val().TimedLogged;
 
-
   // Add each helium data into the table
+  $("#helium-status-table > tbody").empty();
   $("#helium-status-table > tbody").append("<tr><td>" + inTLog + "</td><td>" + cont1 + "</td><td>" + cont2 + "</td><td>" +
   cont3 + "</td><td>" + cont4 + "</td><td>" + inEx + "</td></tr>");
       //SwapDivsWithClick('formId','heliumTableID');
 });
 
+/*flight Data queries*/
+function saveFlightData() {
 
+ event.preventDefault();
+
+  var dateLogged = $("#Logged-By-Input").val().trim();
+  var timeLogged = $("#Logged-By-Input").val().trim();
+  var loggedBy = $("#Time-Logged-Input").val().trim();
+  var system = $("#System-Input").val().trim();
+  var systemStatus = $("#System-Status-Input").val().trim();
+  var flightAltitude = $("#Flight-Altitude-Input").val().trim();
+  var reasonMoored = $("#Reason-Moored-Input").val().trim();
+  var Launches = $("#Launches-Input").val().trim();
+
+  var recoveries = $("#Recoveries-Input").val().trim();
+  var tetherTension = $("#Tether-Tension-Input").val().trim();
+  var groundWinds = $("#Ground-Winds-Input").val().trim();
+  var windsAloft = $("#Winds-Aloft-Input").val().trim();
+  var groundTemp = $("#Ground-Temp-Input").val().trim();
+  var barometricPressure = $("#Barometric-Pressure-Input").val().trim();
+  var pitch = $("#Pitch-Input").val().trim();
+  var heliumPressure = $("#Helium-Pressure-Inpu").val().trim();
+  var ballonetPressure = $("#Ballonet-Pressure-Input").val().trim();
+  var notes = $("#Notes").val().trim();
+
+  var FlightData={
+   dateLogged: dateLogged,
+   timeLogged: timeLogged,
+   loggedBy:loggedBy,
+   system:system,
+   systemStatus:systemStatus,
+   flightAltitude:flightAltitude,
+   reasonMoored:reasonMoored,
+   Launches:Launches,
+   recoveries:recoveries,
+   tetherTension:tetherTension,
+   groundWinds:groundWinds,
+   windsAloft:windsAloft,
+   groundTemp:groundTemp,
+   barometricPressure:barometricPressure,
+   pitch:pitch,
+   heliumPressure:heliumPressure,
+   ballonetPressure:ballonetPressure,
+   notes:notes
+  };
+  console.log(FlightData);
+
+
+firebase.database().ref('Site/FlightData/').push(FlightData);
+console.log("FlightData Update Success");
+}
+
+firebase.database().ref('Site/FlightData/').orderByChild("timeLogged")//dateLogged)
+  .limitToLast(3)
+  .once('value')
+  .then(function(records) {
+  var recObj = records.val();
+  $("#search-report-table > tbody").empty();
+  for(var child in recObj){
+    $("#flight-status-table> tbody").append("<tr><td>" + recObj[child].dateLogged + "</td><td>"+ recObj[child].loggedBy
+     + "</td><td>" +recObj[child].timeLogged+ "</td><td>" +recObj[child].system+ "</td><td>"  + recObj[child].systemStatus + "</td><td>"
+     + recObj[child].flightAltitude + "</td><td>" + recObj[child].reasonMoored + "</td><td>"
+     + recObj[child].Launches + "</td><td>"+ recObj[child].recoveries+ "</td><td>" +recObj[child].tetherTension + "</td><td>" +recObj[child].groundWinds
+     + "</td><td>"+recObj[child].windsAloft + "</td><td>"+recObj[child].groundTemp + "</td><td>"+ recObj[child].barometricPressure + "</td><td>"+recObj[child].pitch
+     + "</td><td>"+recObj[child].heliumPressure + "</td><td>"+recObj[child].ballonetPressure + "</td><td>"+recObj[child].notes + "</td></tr>" );
+  }
+});
 
 /* Charting Data**/
-var groundWinds = [];
-var windsAloft = [];
-var flightAltitude = [];
-var tetherTension = [];
-
-firebase.database().ref('Site/FlightData/').orderByChild("dateLogged")//dateLogged)
+firebase.database().ref('Site/FlightData/').orderByChild('timeLogged')//dateLogged)
   .limitToLast(24)
   .once('value')
   .then(function(records) {
   var recObj = records.val();
   $("#search-report-table > tbody").empty();
   for(var child in recObj){
-    console.log("groundWinds " + recObj[child].groundWinds);
-    groundWinds.push(recObj[child].groundWinds);
-    windsAloft.push(recObj[child].windsAloft);
-    flightAltitude.push(recObj[child].flightAltitude);
-    tetherTension.push(recObj[child].tetherTension);
+
+      groundWinds.push(Number(recObj[child].groundWinds));
+      //windsAloft.push(Number(recObj[child].windsAloft));
+    //  flightAltitude.push(Number(recObj[child].flightAltitude));
+      //tetherTension.push(Number(recObj[child].tetherTension));
+      //console.log("groundWinds " + groundWinds);
   }
 });
 
+/*
+firebase.database(24).ref('Site/FlightData/').orderByChild("dateLogged")//dateLogged)
+  .limitToLast()
+  .once('value')
+  .then(function(records) {
+  var recObj = records.val();
+  $("#search-report-table > tbody").empty();
+  for(var child in recObj){
+    console.log("flightAltitude " + Number(recObj[child].flightAltitude));
+  /*  groundWinds.push(Number(recObj[child].groundWinds));
+    windsAloft.push(Number(recObj[child].windsAloft));
+    flightAltitude.push(Number(recObj[child].flightAltitude));
+    tetherTension.push(Number(recObj[child].tetherTension));
+  }
+});*/
 
 var ctx = document.getElementById("line-chart");
     console.log ("Bradshaw :" + ctx);
+    console.log("groundWinds " + groundWinds);
+  /*  groundWinds.push(10);
+    windsAloft.push(20);
+    flightAltitude.push(34);
+    tetherTension.push(75);
+    groundWinds.push(15);
+    windsAloft.push(25);
+    flightAltitude.push(39);
+    tetherTension.push(80);
+
+    groundWinds.push(20);
+    windsAloft.push(30);
+    flightAltitude.push(44);
+    tetherTension.push(78);*/
 
     var lnChart = new Chart(ctx, {
         type: 'bar',
 		        type: 'line',
 		  data: {
-		    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+		    labels: [5,10,20,25,30,40,50,60,70,80],
 		    datasets: [{
 		        data: groundWinds,
 		        label: "Ground Wind Speed",
@@ -125,6 +220,28 @@ var ctx = document.getElementById("line-chart");
           title: {
 		      display: true,
 		      text: 'Top Gun System Metrics'
-		    }
+		    },
+        scales: {
+                    xAxis: {
+                         type: 'datetime',
+                         dateTimeLabelFormats: {
+                             day: '%b %H:%M:%S'
+                         },
+                         title: {
+                             text: 'Time of day'
+                         }
+                    },
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                steps: 10,
+                                stepValue: 5,
+                                max: 100
+                            }
+                        }]
+                }
+
+
 		  }
     });
