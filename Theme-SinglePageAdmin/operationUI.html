@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html"><img src="images/logo30.png" alt="">ASADI</a>
+          <a class="navbar-brand" href="index.html"><!--img src="images/logo30.png" alt=""-->ASADI</a>
         </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -46,21 +46,28 @@
        <div class="row">
          <!-- DONUT CHART BLOCK -->
            <div class="col-sm-4 col-lg-4">
-            <div class="dash-unit">
-              <dtitle>Current Weather</dtitle>
-              <hr>
-              <div class="weatherspacing">
-                <p>City: <span id="city"></span></p>
-                <p>Main Weather: <span id="main_weather"></span></p>
-                <p>Description: <span id="description_weather"></span></p>
-                <img id="weather_image" src="">
-                <p>Temperature: <span id="temperature"></span></p>
-                <p>Pressure: <span id="pressure"></span></p>
-                <p>Humidity: <span id="humidity"></span></p>
-                <p>Wind: <span id="wind"></span></p>
-                <input type="text" placeholder="Current Weather" style="width:230px; color:black;"><button type="button" class="query_btn btn btn-default btn-sm">Search</button><br>
-              </div>
-            </div>
+
+             <div class="dash-unit">
+                     <dtitle>Current Weather:</dtitle>
+                     <hr>
+                     <div class="weatherAPIBlock" style="background-color:  transparent">
+                         <ul class="list-group list-group-flush" style="background-color: transparent; list-style-type:none;">
+                             <li style="background-color:  transparent">City: <span id="city"></span></li>
+                             <li>Main Weather: <span id="main_weather"></span></li>
+                             <li>Description: <span id="description_weather"></span></li>
+                             <!--img id="weather_image" src=""-->
+                             <li>Temperature: <span id="temperature"></span></li>
+                             <li>Pressure: <span id="pressure"></span></li>
+                             <li>Humidity: <span id="humidity"></span></li>
+                             <li>Wind: <span id="wind"></span></li>
+                             <li>Description: <span id="description_weather"></span></li>
+                         </ul>
+
+                         <input class="weather-input" type="text" placeholder="Current Weather">
+                         <button type="button" class="query_btn btn btn-default btn-sm" style="margin-top:-18px">Search</button>
+                     </div>
+                 </div>
+
            </div>
 
          <!-- DONUT CHART BLOCK -->
@@ -142,15 +149,30 @@
                                  </div>
                                </div>
                                <div class="form-row">
-                                 <div class="form-group col-md-3">
+                                 <!--div class="form-group col-md-3">
                                    <input type="text" class="form-control" placeholder="System-Status-Input" id="System-Status-Input">
-                                 </div>
+                                 </div-->
+                                 <div class="form-group col-md-3">
+                                    <select class="form-control" id="System-Status-Input">
+                                      <option>FMC</option>
+                                      <option>NMC</option>
+                                      <option>PMC</option>
+                                    </select>
+                                  </div>
                                  <div class="form-group col-md-3">
                                    <input type="text" class="form-control" placeholder="Flight Altitude" id="Flight-Altitude-Input">
                                  </div>
-                                 <div class="form-group col-md-3">
+                                 <!--div class="form-group col-md-3">
                                    <input type="text" class="form-control" placeholder="Reason-Moored" id="Reason-Moored-Input">
-                                 </div>
+                                 </div-->
+                                 <div class="form-group col-md-3">
+                                    <select class="form-control" id="Reason-Moored-Input">
+                                      <option>WX</option>
+                                      <option>SM</option>
+                                      <option>UM</option>
+                                      <option>BD</option>
+                                    </select>
+                                  </div>
                                </div>
                                <div class="form-row">
                                  <div class="form-group col-md-3">
@@ -192,7 +214,7 @@
                                  </div>
                                </div>
                                 <div class="form-group col-md-6">
-                                 <button type="button" class="btn btn-primary" style= "margin-left: 10px;" onclick="saveHeliumData(),SwapDivsWithClick('flightFormId','flightTableID')">Save</button>
+                                 <button type="button" class="btn btn-primary" style= "margin-left: 10px;" onclick="saveFlightData(),SwapDivsWithClick('flightFormId','flightTableID')">Save</button>
                                  <button type="button" class="btn btn-primary" onclick="SwapDivsWithClick('flightFormId','flightTableID')">Close</button>
                                </div>
                            </form>
@@ -227,7 +249,7 @@
                             </tbody>
                          </table>
                           <br>
-                          <button type="button" class="btn btn-primary" onclick="SwapDivsWithClick('flightFormId','flightTableID')">Add</button-->
+                          <button type="button" class="btn btn-primary" style="margin-top:-18px" onclick="SwapDivsWithClick('flightFormId','flightTableID')">Add</button-->
                        </div><!--flightTableID-->
 
                      </div><!--fligtTab-end-->
@@ -313,6 +335,52 @@
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
      <script src="assets/firebase/heliumDB.js"></script>
+
+     <script type="text/javascript">
+     $(document).ready(function() {
+       var appID = "eb7acd14dcfc608e19796902cddb4326";
+
+       $(".query_btn").click(function() {
+
+         var query_param = $(this).prev().val();
+
+
+         if ($(this).prev().attr("placeholder") == "Current Weather") {
+           var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
+
+           $.getJSON(weather, function(json) {
+
+
+             $("#city").html(json.name);
+             $("#main_weather").html(json.weather[0].main);
+             $("#description_weather").html(json.weather[0].description);
+             $("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
+             //Temp coversion//
+             function tempconvert() {
+               var tempmath = (((json.main.temp - 273.15) * 1.8) + 32);
+               return tempmath.toFixed(2);
+             };
+
+             $("#temperature").html(tempconvert() + "F");
+             $("#pressure").html(json.main.pressure + "mb/hPa");
+             $("#humidity").html(json.main.humidity + "%");
+             //Wind knots Convert//
+             function windconvert() {
+               var windmath = ((json.wind.speed) * 1.9438445);
+               return windmath.toFixed(2);
+             };
+             $("#wind").html(windconvert() + "Knts Deg: " + (json.wind.deg));
+
+             console.log(json);
+           });
+
+         }
+
+       })
+
+
+     });
+   </script>
 
   </body>
 
