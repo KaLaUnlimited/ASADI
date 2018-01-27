@@ -9,7 +9,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-/* Charting Data**/
+//////////////////////////////////////* Charting Data**//////////////////////////////////
 var groundWinds = [];
 var windsAloft = [];
 var flightAltitude = [];
@@ -74,7 +74,7 @@ options: {
 
 
 
-var flightData_ref= firebase.database().ref('Site/FlightData/')
+var flightData_ref= firebase.database().ref('Site/FlightData/');
 
 ///////////////////////////////////////////////////////search method  record///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // var startDate=$("#Start-Date").val().trim();
@@ -122,7 +122,7 @@ for(var child in recObj){
 }
 });
 //});
-}
+};
 
 
 
@@ -143,7 +143,7 @@ function deleteRec() {
 
   flightData_ref.child(key).remove();
   $(this).parents('tr').remove();
-}
+};
 
 
 
@@ -174,4 +174,26 @@ firebase.database().ref('Site/HeliumData/').limitToLast(1).on('child_added', fun
 });
 
 
-////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////Flight Status Window//////////////////////////////////////////////////////
+
+
+flightData_ref.on("child_added", function(snap){
+  if(snap.val().system==="Moored"){
+
+      console.log("if/else :moored")
+        $("#atlanta-Site").empty();
+          $(".aloftButton").hide();
+          $(".mooredButton").show();
+          $("#displayStatus").text(snap.val().systemStatus);
+          $("#displayReason").text(snap.val().reasonMoored);
+
+
+      }
+      else{
+          $("#atlanta-Site").empty();
+          $(".mooredButton").hide();
+           $(".aloftButton").show();
+            $("#displayStatus").text(snap.val().systemStatus);
+            $("#displayReason").text(snap.val().reasonMoored);
+      }
+})

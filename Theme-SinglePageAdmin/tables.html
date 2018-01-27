@@ -83,7 +83,7 @@
                   
               <div class=" col-sm-6 col-lg-6 text-center" style="background-color: ##414141; color:#b1c738; " >FLIGHT DATA</div>
               <div class="text-center" style="background-color: #353535; color:#b1c738">HELIUM DATA</div>
-                <table class="display">
+                <table class="display" id="report-table">
                     <thead>
                         <tr>
                             <th>Date MM/DD/YY</th>
@@ -130,7 +130,7 @@
                 <!--/END First Table -->
                 <br>
                 <!--SECOND Table Full Day Report -->
-                <h4><strong>FULL DAY REPORT</strong></h4>
+                <h4><strong>SEARCH RESULTS</strong></h4>
                 <table class="display" id="dt1">
                     <thead>
                         <tr>
@@ -198,5 +198,18 @@
           </div><!-- /row -->
         </div><!-- /container -->   
   </div><!-- /footerwrap -->
-<script src="assets/javascript/hubLogic.js "></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+        <script>
+        var config = {
+            apiKey: "AIzaSyCzntWHt0eQrf8_T7sNXd7HDcmHmJQK-xM",
+            authDomain: "realtime-d6489.firebaseapp.com",
+            databaseURL: "https://realtime-d6489.firebaseio.com",
+            projectId: "realtime-d6489",
+            storageBucket: "realtime-d6489.appspot.com",
+            messagingSenderId: "540451789449"
+        };
+        firebase.initializeApp(config);
+        </script>
+        <script src="assets/javascript/hubLogic.js"></script>
+
 </body></html>
