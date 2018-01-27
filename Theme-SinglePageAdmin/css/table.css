@@ -35,12 +35,12 @@ body {
 
 table thead tr {
 	background:#353535;
-	height: 30px; 
+	height: 7px; 
 }
 table thead th {
 	border-right: 1px solid #ccc;
 	color: #b2c831;
-	font-size: 12px; 
+	font-size: 10px; 
 }
 table thead th:last-of-type { border-right: none; }
 table tbody {
