@@ -50,8 +50,8 @@
 
 
   <!-- Google Fonts call. Font Used Open Sans & Raleway -->
-  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="assets/css/clientStyle.css">
 
 
@@ -328,7 +328,7 @@
 
 
         if ($(this).prev().attr("placeholder") == "Current Weather") {
-          var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
+          var weather = "https://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
 
           $.getJSON(weather, function(json) {
 
