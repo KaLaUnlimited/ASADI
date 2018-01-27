@@ -7,7 +7,7 @@
  
 
 
-var flightData_ref= firebase.database().ref('Site/FlightData/')
+ var flightData_ref= firebase.database().ref('Site/FlightData/')
   var dateLogged;
   var timeLogged ;
   var loggedBy;
@@ -311,7 +311,7 @@ flightData_ref
 for(var child in recObj){
  //flightData_ref.on("child_added", function(records){
  	console.log("this is the child key: " +child);
-  $("#search-report-table > tbody").append("<tr data-key="+ child+ "><td>" + recObj[child].dateLogged + "</td><td>"+ recObj[child].loggedBy
+  $("#dt1 > tbody").append("<tr data-key="+ child+ "><td>" + recObj[child].dateLogged + "</td><td>"+ recObj[child].loggedBy
   + "</td><td>" +recObj[child].timeLogged+ "</td><td>" +recObj[child].system+ "</td><td>"  + recObj[child].systemStatus + "</td><td>" 
   + recObj[child].flightAltitude + "</td><td>" + recObj[child].reasonMoored + "</td><td>" 
   + recObj[child].Launches + "</td><td>"+ recObj[child].recoveries+ "</td><td>" +recObj[child].tetherTension + "</td><td>" +recObj[child].groundWinds 
