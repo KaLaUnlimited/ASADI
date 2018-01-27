@@ -78,7 +78,7 @@ function saveFlightData() {
   var dateLogged = $("#Logged-By-Input").val().trim();
   var timeLogged = $("#Logged-By-Input").val().trim();
   var loggedBy = $("#Time-Logged-Input").val().trim();
-  var system = $("#System-Input").val().trim();
+  var system = "0";//$("#System-Input").val().trim();
   var systemStatus = $("#System-Status-Input").val().trim();
   var flightAltitude = $("#Flight-Altitude-Input").val().trim();
   var reasonMoored = $("#Reason-Moored-Input").val().trim();
@@ -91,7 +91,7 @@ function saveFlightData() {
   var groundTemp = $("#Ground-Temp-Input").val().trim();
   var barometricPressure = $("#Barometric-Pressure-Input").val().trim();
   var pitch = $("#Pitch-Input").val().trim();
-  var heliumPressure = $("#Helium-Pressure-Inpu").val().trim();
+  var heliumPressure = $("#Helium-Pressure-Input").val().trim();
   var ballonetPressure = $("#Ballonet-Pressure-Input").val().trim();
   var notes = $("#Notes").val().trim();
 
@@ -123,7 +123,7 @@ console.log("FlightData Update Success");
 }
 
 firebase.database().ref('Site/FlightData/').orderByChild("timeLogged")//dateLogged)
-  .limitToLast(3)
+  .limitToFirst(3)
   .once('value')
   .then(function(records) {
   var recObj = records.val();
@@ -148,28 +148,14 @@ firebase.database().ref('Site/FlightData/').orderByChild('timeLogged')//dateLogg
   for(var child in recObj){
 
       groundWinds.push(Number(recObj[child].groundWinds));
-      //windsAloft.push(Number(recObj[child].windsAloft));
-    //  flightAltitude.push(Number(recObj[child].flightAltitude));
-      //tetherTension.push(Number(recObj[child].tetherTension));
+      windsAloft.push(Number(recObj[child].windsAloft));
+      flightAltitude.push(Number(recObj[child].flightAltitude));
+      tetherTension.push(Number(recObj[child].tetherTension));
       //console.log("groundWinds " + groundWinds);
   }
 });
 
-/*
-firebase.database(24).ref('Site/FlightData/').orderByChild("dateLogged")//dateLogged)
-  .limitToLast()
-  .once('value')
-  .then(function(records) {
-  var recObj = records.val();
-  $("#search-report-table > tbody").empty();
-  for(var child in recObj){
-    console.log("flightAltitude " + Number(recObj[child].flightAltitude));
-  /*  groundWinds.push(Number(recObj[child].groundWinds));
-    windsAloft.push(Number(recObj[child].windsAloft));
-    flightAltitude.push(Number(recObj[child].flightAltitude));
-    tetherTension.push(Number(recObj[child].tetherTension));
-  }
-});*/
+
 
 var ctx = document.getElementById("line-chart");
     console.log ("Bradshaw :" + ctx);
@@ -192,7 +178,7 @@ var ctx = document.getElementById("line-chart");
         type: 'bar',
 		        type: 'line',
 		  data: {
-		    labels: [5,10,20,25,30,40,50,60,70,80],
+		    labels: [0,4,8,12,16,20,24],
 		    datasets: [{
 		        data: groundWinds,
 		        label: "Ground Wind Speed",
