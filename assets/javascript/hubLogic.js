@@ -4,7 +4,7 @@
 
 
 //   // Initialize Firebase
- 
+
 
 
  var flightData_ref= firebase.database().ref('Site/FlightData/')
@@ -89,7 +89,7 @@ dataGenerator();
 
     firebase.database().ref('Site/FlightData/').push(FlightData);
    // firebase.database().ref('Site/HeliumData/').push(FlightData);
-   
+
     //working forvariables for html
     loggedBy=$("#Logged-By-Input").val("");
     timeLogged =$("#Time-Logged-Input").val("");
@@ -109,7 +109,7 @@ dataGenerator();
     ballonetPressure=$("#Ballonet-Pressure-Input").val("");
     notes= $("#Notes").val("");
 
-    
+
 
 
 
@@ -123,10 +123,10 @@ console.log(loggedBy);
 
 ////////////////////////////////////////////////////////////Current Status Table////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
-  + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>" 
-  + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
-  + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
-  + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
+  + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>"
+  + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>"
+  + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds
+  + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
 var update=$("<button>").attr("class","update");
@@ -134,23 +134,23 @@ var update=$("<button>").attr("class","update");
 
 
 $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
-  + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system+ "</td><td>"  + snap.val().systemStatus + "</td><td>" 
-  + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
-  + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
-  + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
+  + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system+ "</td><td>"  + snap.val().systemStatus + "</td><td>"
+  + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>"
+  + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds
+  + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch
   + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
 
 ///////////////////////////////////////////////////////////display on dashboard aloft vs. moored//////////////////////////////////////////////////////////////////
       if(snap.val().system==="Moored"){
-     
+
       console.log("if/else :moored")
         $("#atlanta-Site").empty();
           $(".aloftButton").hide();
           $(".mooredButton").show();
           $("#displayStatus").text(snap.val().systemStatus);
           $("#displayReason").text(snap.val().reasonMoored);
- 
+
 
       }
       else{
@@ -174,7 +174,7 @@ function dataGenerator(){
      dateLogged=dateGen();
      loggedBy=nameGen();
     timeLogged =timeGen();
- 
+
     sysStat();
     Launches =Math.floor(Math.random() *85) ;
     recoveries=Math.floor(Math.random() *85) ;
@@ -189,12 +189,12 @@ function dataGenerator(){
     notes= Math.floor(Math.random() *85) ;
 
 
-    
+
 //random name generator
 
 function nameGen(){
     loggedBy=randomEl(adjectives)+' '+randomEl(nouns);
-  
+
 function randomEl(list) {
     var i = Math.floor(Math.random() *85) ;//list.length);
     console.log(list[i])
@@ -208,9 +208,9 @@ return loggedBy;
 
 function timeGen(){
 
- 
+
   timeLogged=randomMilitaryTime(militaryTime);
-  
+
   console.log("y= " + y)
  y++;
   return timeLogged;
@@ -251,7 +251,7 @@ function timeGen(){
       //  return  flightAltitude;
       }
 
-   
+
 
  }
  function sysStatGen(list){
@@ -300,7 +300,7 @@ function search(start){
 flightData_ref
   .orderByChild("dateLogged")
  .equalTo(start)
-  
+
   .once('value')
   .then(function(records) {
   var recObj = records.val();
@@ -312,10 +312,10 @@ for(var child in recObj){
  //flightData_ref.on("child_added", function(records){
  	console.log("this is the child key: " +child);
   $("#dt1 > tbody").append("<tr data-key="+ child+ "><td>" + recObj[child].dateLogged + "</td><td>"+ recObj[child].loggedBy
-  + "</td><td>" +recObj[child].timeLogged+ "</td><td>" +recObj[child].system+ "</td><td>"  + recObj[child].systemStatus + "</td><td>" 
-  + recObj[child].flightAltitude + "</td><td>" + recObj[child].reasonMoored + "</td><td>" 
-  + recObj[child].Launches + "</td><td>"+ recObj[child].recoveries+ "</td><td>" +recObj[child].tetherTension + "</td><td>" +recObj[child].groundWinds 
-  + "</td><td>"+recObj[child].windsAloft + "</td><td>"+recObj[child].groundTemp + "</td><td>"+ recObj[child].barometricPressure + "</td><td>"+recObj[child].pitch 
+  + "</td><td>" +recObj[child].timeLogged+ "</td><td>" +recObj[child].system+ "</td><td>"  + recObj[child].systemStatus + "</td><td>"
+  + recObj[child].flightAltitude + "</td><td>" + recObj[child].reasonMoored + "</td><td>"
+  + recObj[child].Launches + "</td><td>"+ recObj[child].recoveries+ "</td><td>" +recObj[child].tetherTension + "</td><td>" +recObj[child].groundWinds
+  + "</td><td>"+recObj[child].windsAloft + "</td><td>"+recObj[child].groundTemp + "</td><td>"+ recObj[child].barometricPressure + "</td><td>"+recObj[child].pitch
   + "</td><td>"+recObj[child].heliumPressure + "</td><td>"+recObj[child].ballonetPressure + "</td><td>"+recObj[child].notes + "</td><td><button id='upDateRec' data-toggle='modal' data-target='#exampleModal' data-key="
   + child + ">Update Record</button></td></tr>" );
 
@@ -357,7 +357,7 @@ $("#saveModal").on("click", function(){
    heliumPressure=$("#Helium-Pressure-Input").val().trim();
    ballonetPressure=$("#Ballonet-Pressure-Input").val().trim();
    notes= $("#Notes").val().trim();
-	
+
 
 
 	console.log(dateLogged)
@@ -464,22 +464,62 @@ var appID = "eb7acd14dcfc608e19796902cddb4326";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////join ///////////////////////////////////////////////////////////////////////////////////
 
+var groundWinds = [];
+var windsAloft = [];
+var flightAltitude = [];
+var tetherTension = [];
 
+firebase.database().ref('Site/FlightData/').orderByChild("dateLogged")//dateLogged)
+  .limitToLast(24)
+  .once('value')
+  .then(function(records) {
+  var recObj = records.val();
+  $("#search-report-table > tbody").empty();
+  for(var child in recObj){
+    console.log("groundWinds " + parseInt(recObj[child].groundWinds));
+    groundWinds.push(Number(recObj[child].groundWinds));
+   windsAloft.push(Number(recObj[child].windsAloft));
+   flightAltitude.push(Number(recObj[child].flightAltitude));
+   tetherTension.push(Number(recObj[child].tetherTension));
+  }
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+new Chart(document.getElementById("line-chart"), {
+type: 'line',
+data: {
+  labels: ["January","Feburary","March","April","May","June","July","August","September","October","November","December"],
+  datasets: [{
+      data: [86,114,106,106,107,111,133,221,783,2478],
+      label: "Scheduled Maintenance",
+      borderColor: "#3e95cd",
+      fill: false
+    }, {
+      data: [282,350,411,502,635,809,947,1402,3700,5267],
+      label: "Aloft",
+      borderColor: "#8e5ea2",
+      fill: false
+    }, {
+      data: [168,170,178,190,203,276,408,547,675,734],
+      label: "Battle Damage",
+      borderColor: "#3cba9f",
+      fill: false
+    }, {
+      data: [40,20,10,16,24,38,74,167,508,784],
+      label: "Weather",
+      borderColor: "#e8c3b9",
+      fill: false
+    }, {
+      data: [6,3,2,2,7,26,82,172,312,433],
+      label: "Moored",
+      borderColor: "#c45850",
+      fill: false
+    }
+  ]
+},
+options: {
+  title: {
+    display: true,
+    text: 'Site Operational Graph'
+  }
+}
+});

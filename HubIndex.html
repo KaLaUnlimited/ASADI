@@ -163,7 +163,7 @@
                             <li>Wind: <span id="wind"></span></li>
                             <li>Description: <span id="description_weather"></span></li>
                         </ul>
-                        <input class="weather-input" type="text" placeholder="Current Weather">
+                        <input class="weather-input" type="text" style="color:black;" placeholder="Current Weather">
                         <button type="button" class="query_btn btn btn-default btn-sm">Search</button>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
                     <hr>
                     <div class="alertToggle col-md-12" id="#atlanta-Site">
                         <ul class="list-group" style="list-style-type:none;">
-                            <li  style="padding-left: 50px> Site: Atlanta
+                            <li  style="padding-left: 50px> Site: Atlanta">
                                 <br>
                                 <button type="button" class="btn btn-success aloftButton" style="margin-left: 50px">Aloft</button>
                                 <button type="button" class="btn btn-danger mooredButton" style="margin-left: 50px"> Moored</button>
@@ -252,15 +252,8 @@
                     <hr>
                     <br>
                     <br>
-                    <div class="flexslider">
-                        <ul class="slides">
-                            <li><img src="images/slide01.png" alt="slider"></li>
-                            <li><img src="images/slide02.png" alt="slider"></li>
-                        </ul>
-                    </div>
-                    <div class="cont">
-                        <p>StatCounter Information</p>
-                    </div>
+                    <canvas class="chart" id="line-chart" width="150px" height="75px"></canvas>
+
                 </div>
             </div>
             <!--  </div> -->
@@ -292,6 +285,8 @@
         };
         firebase.initializeApp(config);
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+
         <script src="assets/javascript/hubLogic.js"></script>
 </body>
 
