@@ -78,7 +78,7 @@ function saveFlightData() {
   var dateLogged = $("#Logged-By-Input").val().trim();
   var timeLogged = $("#Logged-By-Input").val().trim();
   var loggedBy = $("#Time-Logged-Input").val().trim();
-  var system = "0";//$("#System-Input").val().trim();
+  var system = 0;//$("#System-Input").val().trim();
   var systemStatus = $("#System-Status-Input").val().trim();
   var flightAltitude = $("#Flight-Altitude-Input").val().trim();
   var reasonMoored = $("#Reason-Moored-Input").val().trim();
@@ -123,7 +123,7 @@ console.log("FlightData Update Success");
 }
 
 firebase.database().ref('Site/FlightData/').orderByChild("timeLogged")//dateLogged)
-  .limitToFirst(3)
+  .limitToFirst(6)
   .once('value')
   .then(function(records) {
   var recObj = records.val();
@@ -144,7 +144,7 @@ firebase.database().ref('Site/FlightData/').orderByChild('timeLogged')//dateLogg
   .once('value')
   .then(function(records) {
   var recObj = records.val();
-  $("#search-report-table > tbody").empty();
+  $("#flight-status-table > tbody").empty();
   for(var child in recObj){
 
       groundWinds.push(Number(recObj[child].groundWinds));
@@ -160,19 +160,6 @@ firebase.database().ref('Site/FlightData/').orderByChild('timeLogged')//dateLogg
 var ctx = document.getElementById("line-chart");
     console.log ("Bradshaw :" + ctx);
     console.log("groundWinds " + groundWinds);
-  /*  groundWinds.push(10);
-    windsAloft.push(20);
-    flightAltitude.push(34);
-    tetherTension.push(75);
-    groundWinds.push(15);
-    windsAloft.push(25);
-    flightAltitude.push(39);
-    tetherTension.push(80);
-
-    groundWinds.push(20);
-    windsAloft.push(30);
-    flightAltitude.push(44);
-    tetherTension.push(78);*/
 
     var lnChart = new Chart(ctx, {
         type: 'bar',
