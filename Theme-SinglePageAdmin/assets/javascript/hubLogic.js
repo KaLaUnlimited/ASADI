@@ -121,18 +121,14 @@ flightData_ref.on("child_added", function(snap){
 
 console.log(loggedBy);
 
-extend({}
+
 ////////////////////////////////////////////////////////////Current Status Table////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $("#report-table> tbody").html("<tr><td>" + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
   + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>" 
   + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
   + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
   + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td><td>"+snap.val().barometricPressure + "</td><td>"+snap.val().pitch 
-  + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes  + snap.val().dateLogged + "</td><td>"+ snap.val().loggedBy
-  + "</td><td>" +snap.val().timeLogged+ "</td><td>" +snap.val().system + "</td><td>" + snap.val().systemStatus + "</td><td>" 
-  + snap.val().flightAltitude + "</td><td>" + snap.val().reasonMoored + "</td><td>" 
-  + snap.val().Launches + "</td><td>"+ snap.val().recoveries+ "</td><td>" +snap.val().tetherTension + "</td><td>" +snap.val().groundWinds 
-  + "</td><td>"+snap.val().windsAloft + "</td><td>"+snap.val().groundTemp + "</td></tr>" );
+  + "</td><td>"+snap.val().heliumPressure + "</td><td>"+snap.val().ballonetPressure + "</td><td>"+snap.val().notes + "</td></tr>" );
 
 var update=$("<button>").attr("class","update");
 //////////////////////////////////////////////////////////////////Full Day Table//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,7 +162,7 @@ $("#full-report-table > tbody").append("<tr><td>" + snap.val().dateLogged + "</t
             $("#displayReason").text(snap.val().reasonMoored);
       }
 })
-})
+
 
 
 // firebase.database().ref('Site/HeliumData/').limitToLast(1).on('child_added', function(snapshot) {
@@ -418,12 +414,12 @@ search(dateLogged);
 
 
 
-// fb.child('user/123').once('value', function(userSnap) {
-//    fb.child('media/123').once('value', function(mediaSnap) {
-//        // extend function: https://gist.github.com/katowulf/6598238
-//        console.log( extend({}, userSnap.val(), mediaSnap.val()) );
-//    });
-// });
+fb.child('user/123').once('value', function(userSnap) {
+   fb.child('media/123').once('value', function(mediaSnap) {
+       // extend function: https://gist.github.com/katowulf/6598238
+       console.log( extend({}, userSnap.val(), mediaSnap.val()) );
+   });
+});
 
 function extend(base) {
     var parts = Array.prototype.slice.call(arguments, 1);
