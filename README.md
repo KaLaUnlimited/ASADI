@@ -4,4 +4,4 @@ Web application reporting real-time operational status on asset telemetry and fu
 
 Screen Shots of my contribution:
 
-![screen shot of asadi]https://github.com/KaLaUnlimited/myPortfolio/blob/master/img/portfolio/fullsize/Asadiscreenshots.png
+![screen shot of asadi] https://github.com/KaLaUnlimited/myPortfolio/blob/master/img/portfolio/fullsize/Asadiscreenshots.png
